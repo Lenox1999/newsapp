@@ -1,9 +1,11 @@
 import React from 'react'
+import './Article.css'
 
-function Article() {
+function Article({ article }) {
   return (
-    <div>Article
-      <p>Goodmorning world</p>
+    <div className="article-container">
+      <h1>{article?.title || 'No title'}</h1>
+      <p>{article?.description || article?.content || 'No description'}</p>
     </div>
   )
 }

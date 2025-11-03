@@ -4,6 +4,7 @@ from fastapi import FastAPI
 import os
 from dotenv import load_dotenv
 import requests
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
@@ -13,15 +14,20 @@ print(news_api_key)
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def read_root():
-    url = ('https://api.currentsapi.services/v1/latest-news?'
-        'language=en&'
-        f'apiKey={api_key}')
-    print(url)
-    response = requests.get(url)
-    return response.json()
+    
+    response = get_latest_news()
+    return response
 
 @app.get(f"/news")
 def get_news(q: Union[str, None] = None, category: Union[str, None] = None):
