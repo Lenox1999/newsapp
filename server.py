@@ -43,6 +43,9 @@ def search_news(q: str, category: str):
     response = requests.get(url)
     return response.json()
 
+# TODO: let requests handle url building instead of doing it by hand
+# TODO: add option to let frontend choose api
+
 def currents_api_url_builder(q: str, category: str, mode: int):
     if mode == 0:
       url = ('https://api.currentsapi.services/v1/search?'
