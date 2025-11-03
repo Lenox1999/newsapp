@@ -1,11 +1,14 @@
 .search-bar-container {
+  position:absolute;
+  right: 0;
+  /* top: 50%; transform: translateY(-50%); */
+  top: 0;
   height: 50px;
   margin: 15px;
 }
 
 .search-bar-input {
   height: 100%;
-  width: 30%;
   font-size: 20px;
   text-align: center;
   background-color: black;

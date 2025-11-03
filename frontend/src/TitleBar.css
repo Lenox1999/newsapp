@@ -1,0 +1,14 @@
+.title-bar-container {
+  position: relative;
+  background-color: black;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid white;
+  margin-bottom: 30px;
+}
+
+.header {
+  font-size: 30px;
+  font-weight: bold;
+}

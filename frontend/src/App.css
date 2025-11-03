@@ -44,3 +44,8 @@
 .search-bar {
   
 }
+
+.title-bar {
+  width: 100%;
+  height: fit-content;
+}

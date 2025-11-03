@@ -57,6 +57,7 @@ The following RSS feeds WILL be implemented (depends on availability):
 
 ### Run Backend Server
 ```bash
+python -m venv venv # only necessary for first time
 source venv/bin/activate 
 uvicorn main:app --reload
 ```
