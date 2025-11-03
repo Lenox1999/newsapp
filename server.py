@@ -78,6 +78,7 @@ def news_api_url_builder(q: str, category: str, mode: int):
   elif mode == 0:
     url = ('https://newsapi.org/v2/everything?'
           f'apiKey={news_api_key}&'
+          'searchIn=title'
           'sortBy=popularity&')
 
     if q and category:

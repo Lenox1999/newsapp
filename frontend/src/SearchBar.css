@@ -1,0 +1,14 @@
+.search-bar-container {
+  height: 50px;
+  margin: 15px;
+}
+
+.search-bar-input {
+  height: 100%;
+  width: 30%;
+  font-size: 20px;
+  text-align: center;
+  background-color: black;
+  border-radius: 10px;
+  border: 3px solid white;
+}
