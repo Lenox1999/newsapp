@@ -1,2 +1,6 @@
 .env
 __pycache__/
+frontend/node_modules/
+frontend/public/
+frontend/package-lock.json
+frontend/src/assets/
