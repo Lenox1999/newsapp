@@ -7,6 +7,9 @@ import requests
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
+news_api_key = os.getenv("NEWS_API_KEY")
+
+print(news_api_key)
 
 app = FastAPI()
 
@@ -20,30 +23,59 @@ def read_root():
     response = requests.get(url)
     return response.json()
 
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
-
 @app.get(f"/news")
-def get_news(q: Union[str, None] = None, topic: Union[str, None] = None):
-    if topic and q:
-      print("boom chakalaka")
-      return {"q": q, "topic": topic}
-    elif q: 
-      print("lol that's interesting q")
-      return {"q": q}
-    elif topic:
-      print("lol that's interesting topic")
-      return {"topic": topic}
+def get_news(q: Union[str, None] = None, category: Union[str, None] = None):
+    if category or q:
+      return search_news(q, category)
     else:
       print("oh no :c")
       return get_latest_news()
 
   
 def get_latest_news():
-    url = ('https://api.currentsapi.services/v1/latest-news?'
-        'language=en&'
-        f'apiKey={api_key}')
+    url = news_api_url_builder(None, None, 1)
     response = requests.get(url)
     return response.json()
+
+def search_news(q: str, category: str):
+    
+    url = news_api_url_builder(q, category, 0)
+    response = requests.get(url)
+    return response.json()
+
+def currents_api_url_builder(q: str, category: str, mode: int):
+    if mode == 0:
+      url = ('https://api.currentsapi.services/v1/search?'
+          'language=en&'
+          f'apiKey={api_key}&'
+          f'keywords={q}&'
+          )
+      if category:
+       url += f'category={category}'
+      if q:
+        url += f'keywords={q}'
+      return url
+    elif mode == 1:
+      url = ('https://api.currentsapi.services/v1/latest-news?'
+       'language=en&'
+        f'apiKey={api_key}')
+      return url
+
+def news_api_url_builder(q: str, category: str, mode: int):
+  if mode == 1:
+    url = ('https://newsapi.org/v2/top-headlines?'
+          'country=us&'
+          f'apiKey={news_api_key}')
+  elif mode == 0:
+    url = ('https://newsapi.org/v2/everything?'
+          f'apiKey={news_api_key}&'
+          'sortBy=popularity&')
+
+    if q and category:
+      url += f'q={q}&category={category}'
+    elif category:
+      url += f'category={category}'
+    elif q:
+      url += f'q={q}'
+  print(url)
+  return url
