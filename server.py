@@ -37,6 +37,11 @@ def get_news(q: Union[str, None] = None, category: Union[str, None] = None):
       print("oh no :c")
       return get_latest_news()
 
+#dummy endpoint
+@app.get("/input")
+def get_input(q: Union[str, None]):
+  print(f"user typed input {q}")
+  return {"value": q}
   
 def get_latest_news():
     url = news_api_url_builder(None, None, 1)
@@ -47,6 +52,7 @@ def search_news(q: str, category: str):
     
     url = news_api_url_builder(q, category, 0)
     response = requests.get(url)
+    print(response.json()) 
     return response.json()
 
 # TODO: let requests handle url building instead of doing it by hand
@@ -78,7 +84,7 @@ def news_api_url_builder(q: str, category: str, mode: int):
   elif mode == 0:
     url = ('https://newsapi.org/v2/everything?'
           f'apiKey={news_api_key}&'
-          'searchIn=title'
+          #'searchIn=title'
           'sortBy=popularity&')
 
     if q and category:

@@ -1,10 +1,17 @@
-import React from 'react'
+import { useState } from 'react'
 import './SearchBar.css'
 
-function SearchBar() {
+function SearchBar({search, setSearch}) {
+  
+
+  function searchChangeHandler(e) {
+    setSearch(e.target.value);
+  }
+
   return (
     <div className="search-bar-container">
       <input className="search-bar-input"
+       onChange={searchChangeHandler}
        type="text" placeholder="Search for news" />
     </div>
   )
