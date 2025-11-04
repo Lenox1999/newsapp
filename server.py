@@ -118,16 +118,6 @@ def id_gen (response):
   id = 0  
 
   for article in response["articles"]:
-
-     # bring date string into german format. 
-     # TODO: might have to adjust later to fit more date formats
-    #  date_string = article["publishedAt"]
-
-    #  dt = datetime.fromisoformat(date_string.replace("Z", "+00:00"))
-    #  german_format = dt.strftime("%d.%m.%Y %H:%M:%S")
-
-    #  article["publishedAt"] = german_format
-
      article["id"] = id
      id += 1
   print(f"number of articles: {id}")

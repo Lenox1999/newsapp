@@ -34,19 +34,3 @@ if __name__ == "__main__":
   feeds = [rss_bild_url, rss_berliner_zeitung_url]
 
   parse_feed(feeds)
-
-  # print("feed")
-
-  # feed = []
-
-  # for entry in rss_berliner_zeitung["entries"]:
-  #   title = entry.title
-  #   summary = entry.summary
-  #   published_date = entry.published
-  #   article_link = entry.link
-  #   image_link = entry.media_content[0]["url"]
-
-  #   #print(entry)
-  #   print(title,summary,published_date, article_link, image_link)
-    
-  # # print(d["feed"]["title"]))

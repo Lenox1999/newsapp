@@ -5,8 +5,8 @@ function Article({ article }) {
   return (
     <div className="article-container">
       <div>
-        <img src={article?.image_url || 'null'} className='article-image' />
-        <p>{article.author || 'Unknown Author'}</p>
+        <img src={article?.image_url || article.urlToImage ||'null'} className='article-image' />
+        <p>{article.author ||  'Unknown Author'}</p>
         {/* <p>{article.source.name || 'Unknown Publisher'}</p> */}
         <p>{article.publishedAt}</p>
       </div>

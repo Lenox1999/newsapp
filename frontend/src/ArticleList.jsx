@@ -17,8 +17,7 @@ function ArticleList({search}) {
       console.log(`Fetching for: ${search}`);
       fetchFromAPI(`http://127.0.0.1:8000/news?q=${search}`)
         .then(data => {
-          //const searchResultData = data.articles || data.article || [];
-          const searchResultData = data; 
+          const searchResultData = data.articles || data.article || [];
           setArticles(searchResultData);
           console.log(data);
         })
