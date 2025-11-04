@@ -7,6 +7,7 @@ import requests
 from fastapi.middleware.cors import CORSMiddleware
 
 from datetime import datetime
+from rss import parse_feed
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
@@ -14,6 +15,12 @@ news_api_key = os.getenv("NEWS_API_KEY")
 
 
 app = FastAPI()
+
+
+rss_bild_url = f'http://www.bild.de/rss-feeds/rss-16725492,feed=politik.bild.html'
+rss_berliner_zeitung_url = 'https://www.berliner-zeitung.de/feed.xml'
+
+feeds = [rss_bild_url, rss_berliner_zeitung_url]
 
 app.add_middleware(
     CORSMiddleware,
@@ -40,10 +47,19 @@ def get_news(q: Union[str, None] = None, category: Union[str, None] = None):
 
   
 def get_latest_news():
-    url = news_api_url_builder(None, None, 1)
-    response = requests.get(url)
+    #url = news_api_url_builder(None, None, 1)
+    #response = requests.get(url)
 
-    new_response = id_gen(response.json())
+    response = parse_feed(feeds)
+
+    print(response)
+    if len(response)<0:
+      print ("error parsing feeds")
+      return
+
+
+    new_response = id_gen(response)
+    print(new_response)
 
     return new_response
 
@@ -105,13 +121,14 @@ def id_gen (response):
 
      # bring date string into german format. 
      # TODO: might have to adjust later to fit more date formats
-     date_string = article["publishedAt"]
+    #  date_string = article["publishedAt"]
 
-     dt = datetime.fromisoformat(date_string.replace("Z", "+00:00"))
-     german_format = dt.strftime("%d.%m.%Y %H:%M:%S")
+    #  dt = datetime.fromisoformat(date_string.replace("Z", "+00:00"))
+    #  german_format = dt.strftime("%d.%m.%Y %H:%M:%S")
 
-     article["publishedAt"] = german_format
+    #  article["publishedAt"] = german_format
 
      article["id"] = id
      id += 1
   print(f"number of articles: {id}")
+  return response

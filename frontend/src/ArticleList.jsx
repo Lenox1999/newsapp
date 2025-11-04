@@ -17,8 +17,10 @@ function ArticleList({search}) {
       console.log(`Fetching for: ${search}`);
       fetchFromAPI(`http://127.0.0.1:8000/news?q=${search}`)
         .then(data => {
-          const searchResultData = data.articles || data.article || [];
+          //const searchResultData = data.articles || data.article || [];
+          const searchResultData = data; 
           setArticles(searchResultData);
+          console.log(data);
         })
         .catch(error => console.log(error));
     } else {
@@ -27,7 +29,9 @@ function ArticleList({search}) {
         .then(data => {
           if (data["status"] == "error") setError(true);
           const articlesData = data.articles || data.article || [];
+          //const articlesData = data;
           setArticles(articlesData);
+          console.log(data);
         })
         .catch(error => console.error(error));
     }
