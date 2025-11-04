@@ -8,6 +8,7 @@ function Article({ article }) {
         <img src={article?.urlToImage || 'null'} className='article-image' />
         <p>{article.author || 'Unknown Author'}</p>
         <p>{article.source.name || 'Unknown Publisher'}</p>
+        <p>{article.publishedAt}</p>
       </div>
       <div className='article-contents'>
         <h1><a

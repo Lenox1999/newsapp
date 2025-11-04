@@ -5,7 +5,8 @@ import os
 from dotenv import load_dotenv
 import requests
 from fastapi.middleware.cors import CORSMiddleware
-import hashlib
+
+from datetime import datetime
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
@@ -101,8 +102,16 @@ def id_gen (response):
   id = 0  
 
   for article in response["articles"]:
-    #print(article["title"])
-    #  article_id = hashlib.md5(article["title"].encode()).hexdigest()
+
+     # bring date string into german format. 
+     # TODO: might have to adjust later to fit more date formats
+     date_string = article["publishedAt"]
+
+     dt = datetime.fromisoformat(date_string.replace("Z", "+00:00"))
+     german_format = dt.strftime("%d.%m.%Y %H:%M:%S")
+
+     article["publishedAt"] = german_format
+
      article["id"] = id
      id += 1
-  return response
+  print(f"number of articles: {id}")
