@@ -8,14 +8,15 @@ import SearchBar from './SearchBar'
 import TitleBar from './TitleBar'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [search, setSearch] = useState("");
 
   return (
     <>
-      <TitleBar className='title-bar' />
+      <TitleBar search={search} className='title-bar' />
       <ArticleList />  
     </>
   )
 }
 
-export default App
+export default App;
