@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 import requests
 from fastapi.middleware.cors import CORSMiddleware
+import hashlib
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
@@ -40,14 +41,19 @@ def get_news(q: Union[str, None] = None, category: Union[str, None] = None):
 def get_latest_news():
     url = news_api_url_builder(None, None, 1)
     response = requests.get(url)
-    return response.json()
+
+    new_response = id_gen(response.json())
+
+    return new_response
 
 def search_news(q: str, category: str):
     
     url = news_api_url_builder(q, category, 0)
     response = requests.get(url)
-    print(response.json())
-    return response.json()
+    
+    new_response = id_gen(response.json())
+
+    return new_response
 
 # TODO: let requests handle url building instead of doing it by hand
 # TODO: add option to let frontend choose api
@@ -90,3 +96,13 @@ def news_api_url_builder(q: str, category: str, mode: int):
       url += f'q={q}'
   print(url)
   return url
+
+def id_gen (response):
+  id = 0  
+
+  for article in response["articles"]:
+    #print(article["title"])
+    #  article_id = hashlib.md5(article["title"].encode()).hexdigest()
+     article["id"] = id
+     id += 1
+  return response

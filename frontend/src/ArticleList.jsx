@@ -59,7 +59,7 @@ function ArticleList({search}) {
           //   article.urlToImage == null;
           // }
           //setKey(key+1);
-          return <Article key={article.publishedAt} article={article} />
+          return <Article key={article.id} article={article} />
         })
       } 
     </div>
