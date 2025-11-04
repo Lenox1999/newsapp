@@ -22,3 +22,11 @@
   height: auto;
   width: auto;
 }
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: red;
+}
