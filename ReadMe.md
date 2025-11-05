@@ -37,7 +37,7 @@ right now using:
 # NEWS RSS Feeds
 The following RSS feeds WILL be implemented (depends on availability):
 - Frankfurter Allgemeine
-- Berliner Zeitung
+- Berliner Zeitung (has RSS)
 - Bild (has RSS)
 - BBC (has RSS)
 - Washington Post
@@ -45,18 +45,22 @@ The following RSS feeds WILL be implemented (depends on availability):
 
 # TODO
 
-### Left for minimum viable product
-- implement interactive search functionality
+- [x] mvp reached, can now show latest headlines, main latest news feed works with rss, can search using newsapi and currents api
+
+### Next steps
+- [ ] implement sort and search function for rss feeds
+- [ ] implement caching for articles
+- [ ] make more api options available through frontend (country, language, sortby, searchIn, etc.)
 
 ### eventual future features:
-- caching: save data directly on the backend and then lazily hit third party api and update frontend for any differences. for rss feed parsing, this could be done on a hourly or bi-hourly basis where it's pulled into local storage
-- language should be set through ui later on and handled flexibly on backend
-- features like setting setting date, time, sortby etc dynamically set through api
-- implement rss feeds on backend
-- **RSS feed implementation:** have a list of biggest news stations for most important countries: germany, us, france, spain etc. (mainly focusing on germany)
-- could have settings page in frontend to add rss feeds/apis
-- refactor `server.py` to let the requests library handle URL building instead of doing it by hand
-- 
+- [ ] caching: save data directly on the backend and then lazily hit third party api and update frontend for any differences. for rss feed parsing, this could be done on a hourly or bi-hourly basis where it's pulled into local storage
+- [ ] language should be set through ui later on and handled flexibly on backend
+- [ ]features like setting setting date, time, sortby etc dynamically set through api
+- [ ] implement rss feeds on backend
+- [x] **RSS feed implementation:** have a list of biggest news stations for most important countries: germany, us, france, spain etc. (mainly focusing on germany)
+- [ ] could have settings page in frontend to add rss feeds/apis
+- [ ] refactor `server.py` to let the requests library handle URL building instead of doing it by hand (only necessary for api )
+- [ ] possibility to provide newsapi api key through frontend, stored locally (maybe in cookie)
 
 ---
 # Run
